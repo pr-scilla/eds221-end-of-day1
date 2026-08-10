@@ -1,0 +1,1 @@
+The coral reef model approximates percent coral cover in a 5 by 5 grid measured every two years from 2004 to 2024. The model uses two rolled die to determine the outcome of coral growth, mortality, or no change.
