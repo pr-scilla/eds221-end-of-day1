@@ -13,6 +13,7 @@ set.seed(221)
 #print(reef)
 
 initialize_reef(coral_number = 8)
+reef <- initialize_reef(coral_number = 8)
 
 # Your reef should look like this:
 #      [,1] [,2] [,3] [,4] [,5]
@@ -62,19 +63,20 @@ for (t in 2:length(coral_cover_pct)) {
 
         # STEP 8: Determine coral's fate
 
+        
         # Roll 2d6 for this coral
-        coral_outcome <- sum(sample(1:6, size = 2, replace = TRUE))
+        #coral_outcome <- sum(sample(1:6, size = 2, replace = TRUE))
         # Fill in the conditions below for mortality and survival
         # Update the reef accordingly
-        if (coral_outcome <= 3) {
+       # if (coral_outcome <= 3) {
           # Mortality
-          reef[r, c] <- 0
-          print("Coral died")
+          #reef[r, c] <- 0
+         # print("Coral died")
           # Update the reef
-        } else {
+        #} else {
           # Survival
-          reef[r, c] <- 1
-          print("Coral survived")
+         # reef[r, c] <- 1
+         # print("Coral survived")
           # Update the reef
         }
       }
