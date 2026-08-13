@@ -1,15 +1,18 @@
+source("R/util.R")
 set.seed(221)
 
 # STEP 1: Initialize your reef
 
-reef <- matrix(0, nrow = 5, ncol = 5)
-random_coral <- sample(1:25, size = 8)
-for (rc in random_coral) {
-  rc_row <- (rc - 1) %/% 5 + 1
-  rc_col <- (rc - 1) %% 5 + 1
-  reef[rc_row, rc_col] <- 1
-}
-print(reef)
+# reef <- matrix(0, nrow = 5, ncol = 5)
+# random_coral <- sample(1:25, size = 8)
+#for (rc in random_coral) {
+# rc_row <- (rc - 1) %/% 5 + 1
+# rc_col <- (rc - 1) %% 5 + 1
+# reef[rc_row, rc_col] <- 1
+#}
+#print(reef)
+
+initialize_reef(coral_number = 8)
 
 # Your reef should look like this:
 #      [,1] [,2] [,3] [,4] [,5]
@@ -21,7 +24,7 @@ print(reef)
 
 # STEP 2: Create vectors `years` and `coral_cover_pct`
 
-years <- seq( 2004, 2024, by = 2)
+years <- seq(2004, 2024, by = 2)
 coral_cover_pct <- double(11)
 
 # Your vectors should look like this
@@ -30,50 +33,47 @@ coral_cover_pct <- double(11)
 # > coral_cover_pct
 #  [1] 0 0 0 0 0 0 0 0 0 0 0
 
-
 # STEP 3: Calculate coral cover in the first year
 # Hint: reef is all 1's and 0's, so the mean of the reef equals the percent cover.
 
-coral_cover_pct [1] <- mean(reef)
+coral_cover_pct[1] <- mean(reef)
 
 # Your coral cover percent should be:
 # > coral_cover_pct
 #  [1] 0.32 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
 
-# STEP 4: Loop over time. Call your iterator `t`. You've already calculated 
-# percent cover for the first year, so start your sequence at 2. Fill in the 
+# STEP 4: Loop over time. Call your iterator `t`. You've already calculated
+# percent cover for the first year, so start your sequence at 2. Fill in the
 # blank below.
 for (t in 2:length(coral_cover_pct)) {
-  
   # STEP 5: Update current and previous reef
   # Copy reef to a new variable, prev_reef
   prev_reef <- reef
   # Wipe the new reef clean
-  reef <- matrix( data =0, nrow = 5, ncol = 5)
+  reef <- matrix(data = 0, nrow = 5, ncol = 5)
 
   # STEP 6: Loop over the rows and columns. Call your iterators r and c.
   for (r in 1:5) {
     for (c in 1:5) {
-
       # STEP 7: Check for coral
       # Check if this cell had a coral in it in the previous reef
-      if (prev_reef[ r, c] == 1) {
+      if (prev_reef[r, c] == 1) {
         print(paste("Coral found at", r, c))
-        
+
         # STEP 8: Determine coral's fate
-        
+
         # Roll 2d6 for this coral
         coral_outcome <- sum(sample(1:6, size = 2, replace = TRUE))
         # Fill in the conditions below for mortality and survival
         # Update the reef accordingly
-        if (coral_outcome <=3) {
+        if (coral_outcome <= 3) {
           # Mortality
-          reef[ r, c] <- 0
+          reef[r, c] <- 0
           print("Coral died")
           # Update the reef
         } else {
           # Survival
-          reef[ r, c] <- 1
+          reef[r, c] <- 1
           print("Coral survived")
           # Update the reef
         }
